@@ -1,0 +1,1 @@
+package br.edu.infnet.venda.domain.model;
