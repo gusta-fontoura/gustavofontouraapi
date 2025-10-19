@@ -1,21 +1,34 @@
 package br.edu.infnet.vendas;
+import br.edu.infnet.venda.domain.model.*;
+
+import java.util.Scanner;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import br.edu.infnet.venda.domain.model.Vendedor;
 
 
 @SpringBootApplication
 public class VendasApplication {
 
 	public static void main(String[] args) {
-		//SpringApplication.run(VendasApplication.class, args);
+		SpringApplication.run(VendasApplication.class, args);
 		
-		Vendedor gustavo = new Vendedor();
+		Scanner in = new Scanner(System.in);
 		
-		gustavo.nome = "Gustavo";
-		gustavo.salario = 3000.00;
-		System.out.println("Salário com a comissão:  " + gustavo.calcularComissao());
+		
+		System.out.println("Informe o nome do usuário: ");
+		String name = in.next();
+		System.out.println("Informe o senha do usuário: ");
+		String password = in.next();
+		System.out.println("Informe o e-mail do usuário: ");
+		String email = in.next();
+		System.out.println("Informe o local do usuário: ");
+		String location = in.next();
+	
+		User gustavo = new User(1, name, password, email, location);
+		gustavo.registerConfirmation();
+		
+		in.close();
 	}
 
 }
