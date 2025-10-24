@@ -11,7 +11,7 @@ public class UserService {
 	public void createUser(User userData) {
 		
 		userList.add(userData);
-		System.out.println("User has been successfully created.");
+		System.out.println("User has been activated.");
 	}
 	
 	
