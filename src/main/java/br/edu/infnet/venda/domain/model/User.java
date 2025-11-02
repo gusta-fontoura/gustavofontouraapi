@@ -19,6 +19,9 @@ public class User {
 	
 	public void registerConfirmation() {
 		System.out.println("Succesfull register user name: " + this.name);
+		System.out.println("Succesfull register user ID: " + this.id);
+		System.out.println("Succesfull register user email: " + this.email);
+		System.out.println("Succesfull register user local: " + this.location);
 	}
 	
 	public int getId() {
