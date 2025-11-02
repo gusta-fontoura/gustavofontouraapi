@@ -26,4 +26,13 @@ public class UserService {
 		
 		return null;
 	}
+	
+	public List<User> getAllUsers(){
+		return userList;
+	}
+	
+	public boolean deleteUser(int id) {
+		return userList.remove(id) != null;
+	}
+	
 }

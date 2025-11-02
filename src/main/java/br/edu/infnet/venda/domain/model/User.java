@@ -16,6 +16,7 @@ public class User {
 		this.location = location;
 	}
 	
+	
 	public void registerConfirmation() {
 		System.out.println("Succesfull register user name: " + this.name);
 	}
