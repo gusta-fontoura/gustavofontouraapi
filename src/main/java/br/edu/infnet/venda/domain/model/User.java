@@ -1,32 +1,46 @@
 package br.edu.infnet.venda.domain.model;
 
+
+// potencialmente mudar essa classe para business...
+
 public class User {
 
 	public int id;
 	public String name;
 	public String password;
-	public String email;
-	public String location;
+	//public String role;
+	private Finance userFinance;
 	
-	public User(int id, String name, String password, String email, String location){
-		this.id = id;
+	public User(String name, String password){
 		this.name = name;
 		this.password = password;
-		this.email = email;
-		this.location = location;
+		this.userFinance = new Finance();
+	}
+	
+	public void Buy() {
+		
+	}
+	
+	public void Sell() {
+		
 	}
 	
 	
 	public void registerConfirmation() {
 		System.out.println("Succesfull register user name: " + this.name);
 		System.out.println("Succesfull register user ID: " + this.id);
-		System.out.println("Succesfull register user email: " + this.email);
-		System.out.println("Succesfull register user local: " + this.location);
 	}
+	
+	public void checkIncome() {
+		System.out.println("Checando o saldo da conta..");
+		double saldo = this.userFinance.showIncome();
+		System.out.println(this.name + ", seu saldo é: " + saldo);
+	}
+	
 	
 	public int getId() {
         return id;
     }
-	
 }
-
+	
+	
