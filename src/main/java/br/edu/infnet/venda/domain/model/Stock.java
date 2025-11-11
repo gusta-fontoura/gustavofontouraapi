@@ -21,11 +21,13 @@ public class Stock {
 		this.itemList.remove(item);
 	}
 	
-	public void checkItem(Item item) {
+	public boolean checkItem(Item item) {
 		if (!this.itemList.contains(item)){
 			System.out.println("ERROR: Item is not in stockpile");
+			return false;
 		}
 		System.out.println("Item available");
+		return true;
 	}
 	
 	public void showItem(Item item) {
@@ -41,6 +43,12 @@ public class Stock {
 		System.out.println("Item: " + item.name);
 		System.out.println("Quantitie:" + countItem);
 		System.out.println("Value:" + totalValue);
+		}
+	}
+	
+	public void showStock() {
+		for(int i = 0; i < this.itemList.size(); i++) {
+			System.out.println("Item: " + this.itemList.get(i) );
 		}
 	}
 }

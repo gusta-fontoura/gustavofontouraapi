@@ -15,7 +15,7 @@ public class VendasApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(VendasApplication.class, args);
 		
-		/*Menu menu = new Menu();
+		Menu menu = new Menu();
 		
 		System.out.println("Aplicação iniciada!");
 		Scanner in = new Scanner(System.in);
@@ -31,13 +31,13 @@ public class VendasApplication {
 				System.out.println("Informe o senha do usuário: ");
 				String password = in.next();
 				
-				if(password.length() < 8) {
+				while(password.length() < 8) {
 					System.out.println("Senha precisa ter no mínimo 8 letras.");
-					System.out.println("Aplicação encerrada.");
-					break;
+					System.out.println("Informe o senha do usuário: ");
+					password = in.next();
 				}
 				
-				User gustavo = new User(1, name, password);
+				User gustavo = new User(name, password);
 				gustavo.registerConfirmation();
 			case "0":
 				System.out.println("Saindo da aplicação...");
@@ -49,9 +49,19 @@ public class VendasApplication {
 		}
 			
 		in.close();
-		*/
 		
 		
+		User gustavo = new User("Gustavo", "1234");
+		System.out.println("--");
+		gustavo.registerConfirmation();
+		System.out.println("--");
+		gustavo.addIncome(100.00);
+		System.out.println("--");
+		gustavo.Buy("Parafuso", 5.00, 3);
+		System.out.println("--");
+		gustavo.checkIncome();
+		System.out.println("--");
+		System.out.println("--");
 		
 		
 	
@@ -62,6 +72,7 @@ public class VendasApplication {
 		//servico.createUser(gustavo);
 		//System.out.println(servico.getUserProfile(1));
 		
+		}
 	}
-	}
+}
 	
