@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Stock {
 	
-	public List<Item> itemList = new ArrayList<>();
+	private List<Item> itemList = new ArrayList<>();
 	
 	
 	public void enterItem(Item item) {
@@ -47,8 +47,8 @@ public class Stock {
 	}
 	
 	public void showStock() {
-		for(int i = 0; i < this.itemList.size(); i++) {
-			System.out.println("Item: " + this.itemList.get(i) );
+		for(int i = 0; i < itemList.size(); i++) {
+			System.out.println("Item: " + itemList.get(i).name + "Valor: " + itemList.get(i).value);
 		}
 	}
 }

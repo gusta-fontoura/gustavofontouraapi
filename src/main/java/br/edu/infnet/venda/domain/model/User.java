@@ -11,17 +11,16 @@ public class User {
 	//public String role;
 	private Finance userFinance;
 	private Stock userStock;
-	
+
 	public User(String name, String password){
 		this.name = name;
 		this.password = password;
 		this.userFinance = new Finance();
 		this.userStock = new Stock();
 		
+		
 	}
-	
-	// TODO: criar os metodos buy e sell.
-	
+		
 	public void Buy(String name, double value, int quantity) {
 		
 		double totalIncome = userFinance.showIncome();
@@ -35,9 +34,7 @@ public class User {
 				userStock.enterItem(item);
 			}
 		}
-		
-		userStock.showStock();;
-		
+		userStock.showStock();
 	}
 	
 	public void Sell(int quantity, Item item) {
@@ -72,6 +69,15 @@ public class User {
 	public int getId() {
         return id;
     }
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String newName) {
+		this.name = newName;
+	}
+	
 }
 	
 	

@@ -1,0 +1,54 @@
+[33mcommit 6cc79296f1957e77e0895b8c2ad94fd82c376e4d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: GUSTAVO <gustavofont10@gmail.com>
+Date:   Mon Nov 10 21:30:12 2025 -0300
+
+    Feature 2.2: Finalização do feature para entrega do tp2.
+
+[33mcommit aa2ca8d738c33d90a3ca2163948f60705ab01061[m
+Author: GUSTAVO <gustavofont10@gmail.com>
+Date:   Tue Nov 4 20:14:13 2025 -0300
+
+    Feature 2: Iniciando o refactor para feature 2. Mudei a maneira de pensar o projeto e separei algumas classes novas para melhorar a legibilidade e aplicar os conceitos da aula.
+
+[33mcommit 8cb97ac20adabe25d176346e68e24cacd28b6679[m
+Author: GUSTAVO <gustavofont10@gmail.com>
+Date:   Sun Nov 2 17:11:46 2025 -0300
+
+    changing registerConfirmation User class method.
+
+[33mcommit bdc74f511c8214f913856c60adbb4d327cd69457[m
+Author: GUSTAVO <gustavofont10@gmail.com>
+Date:   Sun Nov 2 17:02:51 2025 -0300
+
+    refactor: ajustando a classe main.
+
+[33mcommit 018a4267b0cc35742b8f43afed45669ba519e768[m
+Author: GUSTAVO <gustavofont10@gmail.com>
+Date:   Thu Oct 23 21:21:17 2025 -0300
+
+    New: add scanner validations for user creating, implementing UserService Class
+
+[33mcommit a7f6f37fa494152a1f4b5086fccd5680ff765be2[m
+Merge: 5ca6a27 7adad65
+Author: GUSTAVO <gustavofont10@gmail.com>
+Date:   Sun Oct 19 11:30:17 2025 -0300
+
+    Merge branch 'main' of https://github.com/gusta-fontoura/gustavofontouraapi
+
+[33mcommit 5ca6a27ac7509075ba6f45c0c66cc255870cf882[m
+Author: GUSTAVO <gustavofont10@gmail.com>
+Date:   Sun Oct 19 11:29:55 2025 -0300
+
+    Feature 1: Separação de modelos, criação da camada de serviços e implementação de métodos na camada userService.
+
+[33mcommit 7adad6594ae0071b6caaf3121b8d1acea321dcd0[m
+Author: GUSTAVO <90003154+gusta-fontoura@users.noreply.github.com>
+Date:   Thu Oct 9 21:26:01 2025 -0300
+
+    Create README.md
+
+[33mcommit b71a805af0011eb65ef0e800264860bb0fda86d0[m
+Author: GUSTAVO <gustavofont10@gmail.com>
+Date:   Thu Oct 9 21:21:30 2025 -0300
+
+    init app

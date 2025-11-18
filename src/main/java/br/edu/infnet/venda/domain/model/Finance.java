@@ -22,7 +22,7 @@ public class Finance {
 	}
 		
 	public void financeLogs() {
-		
+		System.out.println("Ainda não defini as ordens para criar uma lista de logs.");
 	}
 }
 	

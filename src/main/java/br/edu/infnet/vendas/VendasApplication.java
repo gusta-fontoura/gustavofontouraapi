@@ -1,6 +1,5 @@
 package br.edu.infnet.vendas;
 import br.edu.infnet.venda.domain.model.*;
-import br.edu.infnet.vendas.domain.services.UserService;
 import br.edu.infnet.venda.domain.model.Menu;
 
 import java.util.Scanner;
@@ -19,6 +18,7 @@ public class VendasApplication {
 		
 		System.out.println("Aplicação iniciada!");
 		Scanner in = new Scanner(System.in);
+		Scanner in2 = new Scanner(System.in);
 		menu.showMenu();
 		while(true) {
 			String menuOpt = in.next();
@@ -39,40 +39,45 @@ public class VendasApplication {
 				
 				User gustavo = new User(name, password);
 				gustavo.registerConfirmation();
+				while(true) {
+					menu.financeMenu();
+					String menuOpt2 = in2.next();
+					switch (menuOpt2) {
+					case "1":
+						System.out.println("Adicionando receita.. ");
+						System.out.println("Quando deseja adicionar a conta: ");
+						double income = in.nextDouble();
+						gustavo.addIncome(income);
+						gustavo.checkIncome();
+					case "2":	
+						System.out.println("Iniciando compra: ");
+						System.out.println("Indique o item para comprar(nome): ");
+						String nome = in.next();
+						System.out.println("Indique o item para comprar(preço unitário): ");
+						double unitPrice = in.nextDouble();
+						System.out.println("Indique o item para comprar(quantidade): ");
+						int quantity = in.nextInt();
+						gustavo.Buy(nome, unitPrice, quantity);
+						break;
+					case "3":
+						//gustavo.ShowFinanceLogs();
+						System.out.println("TODO: implementar logs");
+					case "0":
+						in2.close();
+						menu.showMenu();
+						break;
+					default:
+						System.out.println("Opção inválida. Tente novamente.");
+						menu.financeMenu();
+						}
+					}
 			case "0":
 				System.out.println("Saindo da aplicação...");
 				break; 
 			default:
 				System.out.println("Opção inválida. Tente novamente.");
 				menu.showMenu();
-			
-		}
-			
-		in.close();
-		
-		
-		User gustavo = new User("Gustavo", "1234");
-		System.out.println("--");
-		gustavo.registerConfirmation();
-		System.out.println("--");
-		gustavo.addIncome(100.00);
-		System.out.println("--");
-		gustavo.Buy("Parafuso", 5.00, 3);
-		System.out.println("--");
-		gustavo.checkIncome();
-		System.out.println("--");
-		System.out.println("--");
-		
-		
-	
-		// demonstração da classe servico do usuario
-		
-		//UserService servico = new UserService();
-		
-		//servico.createUser(gustavo);
-		//System.out.println(servico.getUserProfile(1));
-		
+				}
+			}
 		}
 	}
-}
-	

@@ -20,9 +20,9 @@ public class Menu {
 		System.out.println("|         MENU DE FINANÇAS        |");
 		System.out.println("+---------------------------------+");
 		System.out.println("| 1 - Adicionar receita           |");
-		System.out.println("| 2 - Adicionar despesa           |");
+		System.out.println("| 2 - Comprar item                |");
 		System.out.println("| 3 - Mostrar logs de finanças    |");
-		System.out.println("| 0 - Sair                        |");
+		System.out.println("| 0 - Voltar                        |");
 		System.out.println("+---------------------------------+");
 		System.out.print("Digite sua opção: ");
 	}
