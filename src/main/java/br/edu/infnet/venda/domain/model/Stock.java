@@ -38,7 +38,7 @@ public class Stock {
 		for (Item i : itemList) {
 			if(i == item) {
 				countItem++;
-				totalValue += i.value;
+				totalValue += i.GetValue();
 			}
 		System.out.println("Item: " + item.name);
 		System.out.println("Quantitie:" + countItem);
@@ -48,7 +48,7 @@ public class Stock {
 	
 	public void showStock() {
 		for(int i = 0; i < itemList.size(); i++) {
-			System.out.println("Item: " + itemList.get(i).name + "Valor: " + itemList.get(i).value);
+			System.out.println("Item: " + itemList.get(i).name + "Valor: " + itemList.get(i).GetValue());
 		}
 	}
 }

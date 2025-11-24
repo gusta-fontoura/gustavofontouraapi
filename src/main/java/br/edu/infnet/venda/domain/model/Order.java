@@ -1,7 +1,5 @@
 package br.edu.infnet.venda.domain.model;
 import java.time.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Order {
 	private int id;
@@ -42,5 +40,8 @@ public class Order {
 		return item;
 	}
 	
+	/*public enum setOrderStatus(String status) {
+		
+	}*/
 	
 }

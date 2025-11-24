@@ -73,6 +73,7 @@ public class VendasApplication {
 					}
 			case "0":
 				System.out.println("Saindo da aplicação...");
+				in.close();
 				break; 
 			default:
 				System.out.println("Opção inválida. Tente novamente.");

@@ -20,6 +20,7 @@ public class User {
 		
 		
 	}
+	
 		
 	public void Buy(String name, double value, int quantity) {
 		
