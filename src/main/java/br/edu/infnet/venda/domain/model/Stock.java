@@ -31,24 +31,33 @@ public class Stock {
 	}
 	
 	public void showItem(Item item) {
-		
-		
 		int countItem = 0;
 		int totalValue = 0;
 		for (Item i : itemList) {
-			if(i == item) {
+			
+			if (i.getValue() <= 0) {
+	            continue;
+	        }
+			
+			if(i.equals(item)) {
 				countItem++;
-				totalValue += i.GetValue();
+				totalValue += i.getValue();
 			}
-		System.out.println("Item: " + item.name);
-		System.out.println("Quantitie:" + countItem);
-		System.out.println("Value:" + totalValue);
+			
+		System.out.println("Item: " + item.name + "| Quantitie:" + countItem + "| Value: " + totalValue);
 		}
 	}
 	
+	
+	
+	@Override
+	public String toString() {
+		return "Stock [itemList=" + itemList + "]";
+	}
+
 	public void showStock() {
 		for(int i = 0; i < itemList.size(); i++) {
-			System.out.println("Item: " + itemList.get(i).name + "Valor: " + itemList.get(i).GetValue());
+			System.out.println("Item: " + itemList.get(i).name + "Valor: " + itemList.get(i).getValue());
 		}
 	}
 }

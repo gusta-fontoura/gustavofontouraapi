@@ -3,15 +3,14 @@ package br.edu.infnet.venda.domain.model;
 public class Item {
 	String name;
 	private double value;
-	
-	
+
 	public Item(String name, double value) {
 		this.name = name;
 		this.value = value;
 	}
 	
 	public Item(String name) {
-		value = 0;
+		this(name, 0);
 		System.out.println("Item foi criado sem valor.");
 	}
 	
@@ -19,16 +18,21 @@ public class Item {
 		System.out.println("O item foi criado vazio.");
 	}
 	
-	public void SetName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	
-	public void SetValue(double value) {
+	public void setValue(double value) {
 		this.value = value;
 	}
 	
-	public double GetValue() {
+	public double getValue() {
 		return this.value;
+	}
+	
+	@Override
+	public String toString() {
+		return "Item [name=" + name + ", value=" + value + "]";
 	}
 }
 

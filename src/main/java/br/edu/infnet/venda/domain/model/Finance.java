@@ -21,6 +21,11 @@ public class Finance {
 		return this.totalIncome;
 	}
 		
+	@Override
+	public String toString() {
+		return "Finance [totalIncome=" + totalIncome + "]";
+	}
+
 	public void financeLogs() {
 		System.out.println("Ainda não defini as ordens para criar uma lista de logs.");
 	}
