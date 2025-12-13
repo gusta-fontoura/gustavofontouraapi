@@ -3,7 +3,8 @@ package br.edu.infnet.venda.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
-// potencialmente mudar essa classe para business...
+import br.edu.infnet.venda.domain.model.Order.OrderType;
+
 
 public class User {
 
@@ -11,7 +12,6 @@ public class User {
 	private String name;
 	private String password;
 	private boolean activeStatus;
-	//public String role;
 	private Finance userFinance;
 	private Stock userStock;
 	
@@ -29,34 +29,40 @@ public class User {
 		this(name, null);
 	}
 	
-	private void MakeOrderToStock(Item item, String type){
-		Order order = new Order(item);
-		orderList.add(order);
+	private Order MakeOrderToStock(Item item, String type, int quantity){
 		
-		switch(type) {
-			case "sell":
-				order.setOrderTypeToSell();
-				break;
-			case "buy":
-				order.setOrderTypeToBuy();
-				break;
-		}
+		
+		if(type == "buy") {
+				Order buyOrder = new Order(item, quantity, OrderType.BUY);
+				orderList.add(buyOrder);
+				return buyOrder;
+				}
+		else {
+				Order sellOrder = new Order(item, quantity, OrderType.SELL);
+				orderList.add(sellOrder);
+				return sellOrder;
+				}
 	}
 	
 		
-	public void Buy(String name, double value, int quantity) {
+	public void Buy(String name, double value, int quantity, String motivo) {
 		
 		double totalIncome = userFinance.showIncome();
 		double totalDept = value * quantity;
 		
 		if(totalIncome < totalDept) {
 			System.out.println("No funds to complete the operation");
+			return;
+		}
+		
+		userFinance.removeIncome(value);
+	
+		Item item = new Item(name, value);
+	
+		if(motivo == "") {
+			userStock.enterItem(MakeOrderToStock(item, "buy", quantity));
 		}else {
-			for (int i = 0; i < quantity; i++) {
-				Item item = new Item(name, value);
-				MakeOrderToStock(item, "buy");
-				userStock.enterItem(item);
-			}
+			userStock.enterItem(MakeOrderToStock(item, "buy", quantity), motivo);
 		}
 		userStock.showStock();
 	}
@@ -67,8 +73,8 @@ public class User {
 		if(!userStock.checkItem(item)) {
 			System.out.println("ERROR: No item available in stock");
 		}else {
-			MakeOrderToStock(item, "sell");
-			userStock.removeItem(item);
+			;
+			userStock.removeItem(MakeOrderToStock(item, "sell", quantity));
 			userFinance.addIncome(income);
 		}
 		
@@ -115,6 +121,12 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", password=" + password + ", activeStatus=" + activeStatus
 				+ ", userFinance=" + userFinance + ", userStock=" + userStock + ", orderList=" + orderList + "]";
+	}
+
+	public void showLogs() {
+		this.userFinance.showFinanceLogs();
+		this.userStock.showStockLogs();
+		
 	}
 	
 }

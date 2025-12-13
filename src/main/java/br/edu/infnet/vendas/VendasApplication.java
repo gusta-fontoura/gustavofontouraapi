@@ -37,8 +37,8 @@ public class VendasApplication {
 					password = in.next();
 				}
 				
-				User gustavo = new User(name, password);
-				gustavo.registerConfirmation();
+				User user = new User(name, password);
+				user.registerConfirmation();
 				while(true) {
 					menu.financeMenu();
 					String menuOpt2 = in2.next();
@@ -47,8 +47,8 @@ public class VendasApplication {
 						System.out.println("Adicionando receita.. ");
 						System.out.println("Quando deseja adicionar a conta: ");
 						double income = in.nextDouble();
-						gustavo.addIncome(income);
-						gustavo.checkIncome();
+						user.addIncome(income);
+						user.checkIncome();
 					case "2":	
 						System.out.println("Iniciando compra: ");
 						System.out.println("Indique o item para comprar(nome): ");
@@ -57,11 +57,13 @@ public class VendasApplication {
 						double unitPrice = in.nextDouble();
 						System.out.println("Indique o item para comprar(quantidade): ");
 						int quantity = in.nextInt();
-						gustavo.Buy(nome, unitPrice, quantity);
+						System.out.println("Motivo da compra: ");
+						String motivo = in.next();
+						user.Buy(nome, unitPrice, quantity, motivo);
 						break;
 					case "3":
-						//gustavo.ShowFinanceLogs();
-						System.out.println("TODO: implementar logs");
+						user.showLogs();
+						break;
 					case "0":
 						in2.close();
 						menu.showMenu();

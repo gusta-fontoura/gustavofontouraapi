@@ -1,33 +1,47 @@
-package br.edu.infnet.venda.domain.model;
+package br.edu.infnet.venda.domain.model;	
+import java.util.ArrayList;
+import java.util.List;
 
 public class Finance {
 	
 	double totalIncome;
+	List<Logs> ListLogs = new ArrayList<>();
 	
 	public Finance() {
+		
 		this.totalIncome = 0.0;
 	}
 	
-	public void addIncome(double newIncome) {
+	protected void addIncome(double value) {
 		
-		totalIncome = totalIncome + newIncome;
+		totalIncome += value;
+		FinanceLogs log = new FinanceLogs("Adicionado receita", value, "ENTRADA");
+		ListLogs.add(log);
+		
 	}
 	
-	public void removeIncome(double newIncome) {
-		totalIncome = totalIncome - newIncome;
+	protected void removeIncome(double value) {
+		totalIncome -= value;
+		FinanceLogs log = new FinanceLogs("Removendo receita", value, "SAÍDA");
+		ListLogs.add(log);
 	}
 	
 	public double showIncome() {
 		return this.totalIncome;
 	}
 		
+	
+	public void showFinanceLogs() {
+        System.out.println("-- Histórico Financeiro --");
+        for (Logs log : ListLogs) {
+            System.out.println(log.toString()); 
+        }
+	}
+	
 	@Override
 	public String toString() {
 		return "Finance [totalIncome=" + totalIncome + "]";
 	}
 
-	public void financeLogs() {
-		System.out.println("Ainda não defini as ordens para criar uma lista de logs.");
-	}
 }
 	

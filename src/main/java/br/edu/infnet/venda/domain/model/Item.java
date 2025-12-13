@@ -30,6 +30,10 @@ public class Item {
 		return this.value;
 	}
 	
+	public String getName() {
+		return this.name;
+	}
+	
 	@Override
 	public String toString() {
 		return "Item [name=" + name + ", value=" + value + "]";

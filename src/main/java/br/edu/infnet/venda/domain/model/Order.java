@@ -4,18 +4,27 @@ import java.time.*;
 public class Order {
 	private int id;
 	private LocalDate date;
-	private OrderStatus orderStatus;
 	private OrderType orderType;
 	private Item item;
+	private int quantity;
 	
 	
 	
-	public Order(Item item) {
+	public Order(Item item, int quantity, OrderType orderType) {
 		this.id = (int) (Math.random() * (100 - 0 + 1) + 0);
 		this.date = LocalDate.now();
-		this.orderStatus = OrderStatus.PENDING;
-		this.orderType = OrderType.NONE;
+		this.orderType = orderType;;
 		this.item = item;
+		this.quantity = quantity;
+		
+	}
+	
+	public Order(Item item, OrderType orderType) {
+		this.id = (int) (Math.random() * (100 - 0 + 1) + 0);
+		this.date = LocalDate.now();
+		this.orderType = orderType;;
+		this.item = item;
+		this.quantity = 1;
 		
 	}
 	
@@ -23,14 +32,6 @@ public class Order {
 		SELL,
 		BUY,
 		NONE
-	}
-	
-
-	public enum OrderStatus{
-		PENDING,
-		PROCESSING,
-		COMPLETE,
-		CANCELLED
 	}
 	
 	public int getId() {
@@ -43,32 +44,23 @@ public class Order {
 	
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", date=" + date + ", orderStatus=" + orderStatus + ", orderType=" + orderType
+		return "Order [id=" + id + ", date=" + date + ", orderType=" + orderType
 				+ ", item=" + item + "]";
 	}
 
-	public OrderStatus getOrderStatus() {
-		return orderStatus;
-	}
-	
+
 	public OrderType getOrderType() {
 		return this.orderType;
 	}
 	
-	public void setOrderTypeToBuy(){
-		this.orderType = OrderType.BUY;
-	}
-	
-	public void setOrderTypeToSell(){
-		this.orderType = OrderType.SELL;
-	}
 	
 	public Item getItem() {
 		return item;
 	}
 	
-	/*public enum setOrderStatus(String status) {
-		
-	}*/
+	public int getQuantity() {
+		return quantity;
+	}
+	
 	
 }
