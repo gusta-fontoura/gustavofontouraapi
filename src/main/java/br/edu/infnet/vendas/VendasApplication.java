@@ -51,6 +51,8 @@ public class VendasApplication {
 						user.checkIncome();
 					case "2":	
 						System.out.println("Iniciando compra: ");
+						System.out.println("Indique o item para comprar(ID): ");
+						String id = in.next();
 						System.out.println("Indique o item para comprar(nome): ");
 						String nome = in.next();
 						System.out.println("Indique o item para comprar(preço unitário): ");
@@ -59,10 +61,26 @@ public class VendasApplication {
 						int quantity = in.nextInt();
 						System.out.println("Motivo da compra: ");
 						String motivo = in.next();
-						user.Buy(nome, unitPrice, quantity, motivo);
+						user.Buy(nome, id, unitPrice, quantity, motivo);
 						break;
 					case "3":
+						System.out.println("Iniciando venda... ");
+						user.getStock().showStock();
+						System.out.println("Indique o item para venda(Id): ");
+						String idItem = in.next();
+						System.out.println("Indique o item para comprar(quantidade): ");
+						int quantitySell = in.nextInt();
+						Item itemVenda = user.getStock().getItemById(idItem);
+						user.Sell(quantitySell, itemVenda);
+						break;
+					case "4":
 						user.showLogs();
+						break;
+					case "5":
+						user.showReports();
+						break;
+					case "6":
+						user.createLogsReport();
 						break;
 					case "0":
 						in2.close();

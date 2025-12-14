@@ -3,7 +3,7 @@ package br.edu.infnet.venda.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stock {
+public class Stock implements IReport{
 	
 	private List<Item> itemList = new ArrayList<>();
 	private List<Logs> stockLogs = new ArrayList<>();
@@ -34,13 +34,29 @@ public class Stock {
 		registerLog("Manual remove", 0, order.getItem().getName(), 1, "SELL");
 	}
 	
-	protected boolean checkItem(Item item) {
-		if (!this.itemList.contains(item)){
-			System.out.println("ERROR: Item is not in stockpile");
-			return false;
+	@Override
+	public void showReport() {
+		System.out.println(" -- RELATÓRIO DE ESTOQUE --");
+        System.out.println("Itens totais: " + itemList.size());
+        showStock();
+	}
+	
+	public Item getItemById(String id) {
+	    for (Item i : itemList) {
+	        if (i.getId() == id) {
+	            return i;
+	        }
+	    }
+	    return null;
+	}
+	
+	public boolean checkItem(Item i) {
+		if(this.itemList.contains(i)) {
+			System.out.println("Item is not in stockpile!");
+			return true;
 		}
-		System.out.println("Item available");
-		return true;
+		System.out.println("Item is not in stockpile");
+		return false;
 	}
 	
 	protected void showItem(Item item) {
@@ -67,7 +83,7 @@ public class Stock {
 	}
 	
 	private void registerLog(String msg, int idOrdem, String nomeItem, int qtd, String operacao) {
-        StockLogs newLog = new StockLogs(msg, idOrdem, nomeItem, qtd, operacao);
+        Logs newLog = new StockLogs(msg, idOrdem, nomeItem, qtd, operacao);
         this.stockLogs.add(newLog);
     }
 	
@@ -83,10 +99,14 @@ public class Stock {
 		return "Stock [itemList=" + itemList + "]";
 	}
 
-	protected void showStock() {
+	public void showStock() {
 		System.out.println("--- Inventário Completo ---");
 		for(int i = 0; i < itemList.size(); i++) {
-			System.out.println("Item: " + itemList.get(i).name + "Valor: " + itemList.get(i).getValue());
+			System.out.println("ID: " + itemList.get(i).getId() + "Item: " + itemList.get(i).name + "Valor: " + itemList.get(i).getValue());
 		}
+	}
+	
+	public List<Logs> getLogs() {
+	    return new ArrayList<>(this.stockLogs);
 	}
 }

@@ -3,7 +3,7 @@ package br.edu.infnet.venda.domain.model;
 import java.time.LocalDateTime;
 
 
-public class Logs {
+public abstract class Logs {
 	
 
     private LocalDateTime logDate; 
@@ -24,10 +24,8 @@ public class Logs {
         return mensagem;
     }
     
-    public String showLogFormatted() {
-        return "[GERAL] " + getMensagem();
-    }
-
+    public abstract String showLogFormatted();
+    
     @Override
     public String toString() {
         return logDate + " - " + mensagem;

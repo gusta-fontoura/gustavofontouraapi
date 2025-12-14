@@ -2,15 +2,18 @@ package br.edu.infnet.venda.domain.model;
 
 public class Item {
 	String name;
+	String id;
 	private double value;
+	
 
-	public Item(String name, double value) {
+	public Item(String name, String id, double value) {
 		this.name = name;
 		this.value = value;
+		this.id = id;
 	}
 	
-	public Item(String name) {
-		this(name, 0);
+	public Item(String name, String id) {
+		this(name, id, 0.0);
 		System.out.println("Item foi criado sem valor.");
 	}
 	
@@ -33,7 +36,10 @@ public class Item {
 	public String getName() {
 		return this.name;
 	}
-	
+
+	public String getId() {
+		return id;
+	}
 	@Override
 	public String toString() {
 		return "Item [name=" + name + ", value=" + value + "]";

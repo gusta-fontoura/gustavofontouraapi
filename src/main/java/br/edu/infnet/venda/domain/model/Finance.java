@@ -2,7 +2,9 @@ package br.edu.infnet.venda.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Finance {
+import br.edu.infnet.vendas.domain.exception.InsuficientFundsException;
+
+public class Finance implements IReport {
 	
 	double totalIncome;
 	List<Logs> ListLogs = new ArrayList<>();
@@ -15,19 +17,30 @@ public class Finance {
 	protected void addIncome(double value) {
 		
 		totalIncome += value;
-		FinanceLogs log = new FinanceLogs("Adicionado receita", value, "ENTRADA");
+		Logs log = new FinanceLogs("Adicionado receita", value, "ENTRADA");
 		ListLogs.add(log);
 		
 	}
 	
 	protected void removeIncome(double value) {
-		totalIncome -= value;
-		FinanceLogs log = new FinanceLogs("Removendo receita", value, "SAÍDA");
+		if (value > this.totalIncome) {
+	        throw new InsuficientFundsException("Operação negada: Saldo de R$ " + this.totalIncome + " é menor que o valor R$ " + value);
+	    }
+	    
+	    this.totalIncome -= value;
+		Logs log = new FinanceLogs("Removendo receita", value, "SAÍDA");
 		ListLogs.add(log);
 	}
 	
 	public double showIncome() {
 		return this.totalIncome;
+	}
+	
+	@Override
+	public void showReport() {
+		System.out.println(" -- FINANCE REPORT --");
+        toString();
+        showFinanceLogs();
 	}
 		
 	
@@ -41,6 +54,10 @@ public class Finance {
 	@Override
 	public String toString() {
 		return "Finance [totalIncome=" + totalIncome + "]";
+	}
+	
+	public List<Logs> getLogs() {
+	    return new ArrayList<>(this.ListLogs); 
 	}
 
 }

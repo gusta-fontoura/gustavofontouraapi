@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.infnet.venda.domain.model.Order.OrderType;
+import br.edu.infnet.vendas.domain.exception.InsuficientFundsException;
+import br.edu.infnet.vendas.domain.infrastructure.LogRepository;
 
 
 public class User {
@@ -43,28 +45,30 @@ public class User {
 				return sellOrder;
 				}
 	}
-	
 		
-	public void Buy(String name, double value, int quantity, String motivo) {
+	public void Buy(String name, String id, double value, int quantity, String motivo) {
 		
-		double totalIncome = userFinance.showIncome();
 		double totalDept = value * quantity;
-		
-		if(totalIncome < totalDept) {
-			System.out.println("No funds to complete the operation");
-			return;
+		try {
+			userFinance.removeIncome(totalDept);
+			Item item = new Item(name, id, value);
+			
+			if(motivo == "") {
+				userStock.enterItem(MakeOrderToStock(item, "buy", quantity));
+			}else {
+				userStock.enterItem(MakeOrderToStock(item, "buy", quantity), motivo);
+			}
+			userStock.showStock();
+		}	catch(InsuficientFundsException e) {
+			System.err.println("ERRO NA COMPRA: " + e.getMessage());
+		}	catch(Exception e) {
+			System.err.println("Ocorreu um erro inesperado: " + e.getMessage());
 		}
 		
-		userFinance.removeIncome(value);
 	
-		Item item = new Item(name, value);
+		
 	
-		if(motivo == "") {
-			userStock.enterItem(MakeOrderToStock(item, "buy", quantity));
-		}else {
-			userStock.enterItem(MakeOrderToStock(item, "buy", quantity), motivo);
-		}
-		userStock.showStock();
+		
 	}
 	
 	public void Sell(int quantity, Item item) {
@@ -109,12 +113,9 @@ public class User {
 		this.name = newName;
 	}
 	
-	public boolean getActiveStatus() {
-		return activeStatus;
-	}
 	
-	public void SetActiveStatusToFalse() {
-		this.activeStatus = false;
+	public Stock getStock() {
+		return userStock;
 	}
 
 	@Override
@@ -128,6 +129,27 @@ public class User {
 		this.userStock.showStockLogs();
 		
 	}
+	
+	public void showReports() {
+		this.userFinance.showReport();
+		this.userStock.showStock();
+	}
+	
+	public void createLogsReport() {
+        System.out.println("Gerando relatório unificado...");
+
+        LogRepository repo = new LogRepository();
+
+        List<Logs> logsUnificados = new ArrayList<>();
+
+        logsUnificados.addAll(this.userFinance.getLogs());
+        logsUnificados.addAll(this.userStock.getLogs());
+
+
+        String nomeArquivo = "relatorio_" + this.name + "_" + this.id + ".txt";
+
+        repo.saveLogsToFile(nomeArquivo, logsUnificados);
+    }
 	
 }
 	

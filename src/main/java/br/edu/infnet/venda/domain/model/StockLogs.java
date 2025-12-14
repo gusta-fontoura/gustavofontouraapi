@@ -11,8 +11,7 @@ public class StockLogs extends Logs {
         this.ordemId = ordemId;
         this.nomeProduto = nomeProduto;
         this.quantidade = quantidade;
-        this.operacao = operacao;
-        
+        this.operacao = operacao;  
     }
     
     
