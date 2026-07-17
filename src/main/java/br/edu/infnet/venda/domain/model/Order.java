@@ -5,25 +5,25 @@ public class Order {
 	private int id;
 	private LocalDate date;
 	private OrderType orderType;
-	private Item item;
 	private int quantity;
+	private Product product;
 	
 	
 	
-	public Order(Item item, int quantity, OrderType orderType) {
+	public Order(Product product, int quantity, OrderType orderType) {
 		this.id = (int) (Math.random() * (100 - 0 + 1) + 0);
 		this.date = LocalDate.now();
 		this.orderType = orderType;;
-		this.item = item;
+		this.product = product;
 		this.quantity = quantity;
 		
 	}
 	
-	public Order(Item item, OrderType orderType) {
+	public Order(Product product, OrderType orderType) {
 		this.id = (int) (Math.random() * (100 - 0 + 1) + 0);
 		this.date = LocalDate.now();
 		this.orderType = orderType;;
-		this.item = item;
+		this.product = product;
 		this.quantity = 1;
 		
 	}
@@ -45,7 +45,7 @@ public class Order {
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", date=" + date + ", orderType=" + orderType
-				+ ", item=" + item + "]";
+				+ ", produto=" + product + "]";
 	}
 
 
@@ -54,8 +54,8 @@ public class Order {
 	}
 	
 	
-	public Item getItem() {
-		return item;
+	public Product getProduct() {
+		return product;
 	}
 	
 	public int getQuantity() {

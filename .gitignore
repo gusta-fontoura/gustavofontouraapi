@@ -31,3 +31,39 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+# --- Maven ---
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+pom.xml.versionsBackup
+release.properties
+dependency-reduced-pom.xml
+build.log
+
+# --- IntelliJ IDEA ---
+.idea/
+*.iml
+*.iws
+out/
+
+# --- Eclipse ---
+.metadata/
+.classpath
+.project
+.settings/
+*.launch
+
+# --- Visual Studio Code ---
+.vscode/
+
+# --- Arquivos do Sistema Operacional ---
+.DS_Store
+Thumbs.db
+
+# --- Arquivos de Log e Dados Sensíveis ---
+*.log
+.env
+

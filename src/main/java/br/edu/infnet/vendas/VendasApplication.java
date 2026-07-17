@@ -67,11 +67,11 @@ public class VendasApplication {
 						System.out.println("Iniciando venda... ");
 						user.getStock().showStock();
 						System.out.println("Indique o item para venda(Id): ");
-						String idItem = in.next();
+						String idProduto = in.next();
 						System.out.println("Indique o item para comprar(quantidade): ");
 						int quantitySell = in.nextInt();
-						Item itemVenda = user.getStock().getItemById(idItem);
-						user.Sell(quantitySell, itemVenda);
+						Product produtoVenda = user.getStock().getItemById(idProduto);
+						user.Sell(quantitySell, produtoVenda);
 						break;
 					case "4":
 						user.showLogs();

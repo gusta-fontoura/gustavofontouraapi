@@ -31,16 +31,16 @@ public class User {
 		this(name, null);
 	}
 	
-	private Order MakeOrderToStock(Item item, String type, int quantity){
+	private Order MakeOrderToStock(Product product, String type, int quantity){
 		
 		
 		if(type == "buy") {
-				Order buyOrder = new Order(item, quantity, OrderType.BUY);
+				Order buyOrder = new Order(product, quantity, OrderType.BUY);
 				orderList.add(buyOrder);
 				return buyOrder;
 				}
 		else {
-				Order sellOrder = new Order(item, quantity, OrderType.SELL);
+				Order sellOrder = new Order(product, quantity, OrderType.SELL);
 				orderList.add(sellOrder);
 				return sellOrder;
 				}
@@ -51,12 +51,12 @@ public class User {
 		double totalDept = value * quantity;
 		try {
 			userFinance.removeIncome(totalDept);
-			Item item = new Item(name, id, value);
+			Product product = new Product(name, id, value);
 			
 			if(motivo == "") {
-				userStock.enterItem(MakeOrderToStock(item, "buy", quantity));
+				userStock.enterItem(MakeOrderToStock(product, "buy", quantity));
 			}else {
-				userStock.enterItem(MakeOrderToStock(item, "buy", quantity), motivo);
+				userStock.enterItem(MakeOrderToStock(product, "buy", quantity), motivo);
 			}
 			userStock.showStock();
 		}	catch(InsuficientFundsException e) {
@@ -71,14 +71,14 @@ public class User {
 		
 	}
 	
-	public void Sell(int quantity, Item item) {
+	public void Sell(int quantity, Product product) {
 		
 		double income = quantity * 1.2;
-		if(!userStock.checkItem(item)) {
+		if(!userStock.checkItem(product)) {
 			System.out.println("ERROR: No item available in stock");
 		}else {
 			;
-			userStock.removeItem(MakeOrderToStock(item, "sell", quantity));
+			userStock.removeItem(MakeOrderToStock(product, "sell", quantity));
 			userFinance.addIncome(income);
 		}
 		
