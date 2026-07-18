@@ -3,9 +3,8 @@ package br.edu.infnet.venda.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.infnet.venda.domain.model.Order.OrderType;
+import br.edu.infnet.venda.domain.services.StockService;
 import br.edu.infnet.vendas.domain.exception.InsuficientFundsException;
-import br.edu.infnet.vendas.domain.infrastructure.LogRepository;
 
 
 public class User {
@@ -14,16 +13,14 @@ public class User {
 	private String name;
 	private String password;
 	private boolean activeStatus;
-	private Finance userFinance;
-	private Stock userStock;
+	private StockService userStock;
 	
-	private List<Order> orderList = new ArrayList<>();
+	private List<SellOrder> orderList = new ArrayList<>();
 
 	public User(String name, String password){
 		this.name = name;
 		this.password = password;
-		this.userFinance = new Finance();
-		this.userStock = new Stock();
+		this.userStock = new StockService();
 		this.activeStatus = true;
 	}
 	
@@ -31,32 +28,16 @@ public class User {
 		this(name, null);
 	}
 	
-	private Order MakeOrderToStock(Product product, String type, int quantity){
-		
-		
-		if(type == "buy") {
-				Order buyOrder = new Order(product, quantity, OrderType.BUY);
-				orderList.add(buyOrder);
-				return buyOrder;
-				}
-		else {
-				Order sellOrder = new Order(product, quantity, OrderType.SELL);
-				orderList.add(sellOrder);
-				return sellOrder;
-				}
-	}
 		
 	public void Buy(String name, String id, double value, int quantity, String motivo) {
 		
-		double totalDept = value * quantity;
 		try {
-			userFinance.removeIncome(totalDept);
-			Product product = new Product(name, id, value);
+			Product product = new Product(name, id, value, quantity);
 			
 			if(motivo == "") {
-				userStock.enterItem(MakeOrderToStock(product, "buy", quantity));
+				userStock.addProduct(null);
 			}else {
-				userStock.enterItem(MakeOrderToStock(product, "buy", quantity), motivo);
+				userStock.addProduct(product);
 			}
 			userStock.showStock();
 		}	catch(InsuficientFundsException e) {
@@ -64,42 +45,23 @@ public class User {
 		}	catch(Exception e) {
 			System.err.println("Ocorreu um erro inesperado: " + e.getMessage());
 		}
-		
-	
-		
-	
-		
 	}
 	
 	public void Sell(int quantity, Product product) {
 		
-		double income = quantity * 1.2;
-		if(!userStock.checkItem(product)) {
+		if(!userStock.checkProduct(product)) {
 			System.out.println("ERROR: No item available in stock");
 		}else {
 			;
-			userStock.removeItem(MakeOrderToStock(product, "sell", quantity));
-			userFinance.addIncome(income);
+			userStock.removeProduct(product.getId());
 		}
 		
 	}
-	
 	
 	public void registerConfirmation() {
 		System.out.println("Succesfull register user name: " + this.name);
 		System.out.println("Succesfull register user ID: " + this.id);
 	}
-	
-	public void addIncome(double income) {
-		this.userFinance.addIncome(income);
-	}
-	
-	public void checkIncome() {
-		System.out.println("Checando o saldo da conta..");
-		double saldo = this.userFinance.showIncome();
-		System.out.println(this.name + ", seu saldo é: " + saldo);
-	}
-	
 	
 	public int getId() {
         return id;
@@ -114,43 +76,15 @@ public class User {
 	}
 	
 	
-	public Stock getStock() {
-		return userStock;
+	public void getStock() {
+		userStock.showStock();
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", password=" + password + ", activeStatus=" + activeStatus
-				+ ", userFinance=" + userFinance + ", userStock=" + userStock + ", orderList=" + orderList + "]";
+				+ ", userStock=" + userStock + ", orderList=" + orderList + "]";
 	}
-
-	public void showLogs() {
-		this.userFinance.showFinanceLogs();
-		this.userStock.showStockLogs();
-		
-	}
-	
-	public void showReports() {
-		this.userFinance.showReport();
-		this.userStock.showStock();
-	}
-	
-	public void createLogsReport() {
-        System.out.println("Gerando relatório unificado...");
-
-        LogRepository repo = new LogRepository();
-
-        List<Logs> logsUnificados = new ArrayList<>();
-
-        logsUnificados.addAll(this.userFinance.getLogs());
-        logsUnificados.addAll(this.userStock.getLogs());
-
-
-        String nomeArquivo = "relatorio_" + this.name + "_" + this.id + ".txt";
-
-        repo.saveLogsToFile(nomeArquivo, logsUnificados);
-    }
-	
 }
 	
 	

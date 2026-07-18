@@ -1,6 +1,5 @@
 package br.edu.infnet.venda.domain.services;
 
-import br.edu.infnet.venda.domain.model.Order;
 import br.edu.infnet.venda.domain.model.Product;
 import br.edu.infnet.venda.domain.model.Stock;
 
@@ -10,6 +9,15 @@ public class StockService {
 	
 	public StockService() {
 		this.stock = new Stock();
+	}
+	
+	public Product getProduct(Product product) {
+	    for(Product p : stock.getProducts()) {
+	        if(p.getId().equals(product.getId())) {
+	            return p;
+	        }
+	    }
+	    return null; 
 	}
 	
 	public void addProduct(Product product) {
@@ -30,6 +38,21 @@ public class StockService {
 				}
 			}
 			System.out.println("Produto não encontrado.");		}
+	}
+	
+	public boolean isAvailable(Product product, int quantity) {
+		if (!(this.checkProduct(product) && quantity >= product.getQuantity())){
+			System.out.println("Erro: Produto não encontrado ou estoque insuficiente.");
+			return false;
+		}
+		return true;
+	}
+	
+	public void decreaseStock(Product product, int quantity) {
+		if(this.isAvailable(product, quantity)) {
+			product.setQuantity(product.getQuantity() - quantity);
+			System.out.println("Quantidade: " + quantity+" saiu do estoque.");
+		}
 	}
 	
 	public boolean checkProduct(Product product) {

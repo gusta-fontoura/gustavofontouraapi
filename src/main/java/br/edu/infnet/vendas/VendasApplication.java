@@ -44,11 +44,7 @@ public class VendasApplication {
 					String menuOpt2 = in2.next();
 					switch (menuOpt2) {
 					case "1":
-						System.out.println("Adicionando receita.. ");
-						System.out.println("Quando deseja adicionar a conta: ");
-						double income = in.nextDouble();
-						user.addIncome(income);
-						user.checkIncome();
+						System.out.println("Não temos mais receita ");
 					case "2":	
 						System.out.println("Iniciando compra: ");
 						System.out.println("Indique o item para comprar(ID): ");
@@ -64,23 +60,16 @@ public class VendasApplication {
 						user.Buy(nome, id, unitPrice, quantity, motivo);
 						break;
 					case "3":
-						System.out.println("Iniciando venda... ");
-						user.getStock().showStock();
-						System.out.println("Indique o item para venda(Id): ");
-						String idProduto = in.next();
-						System.out.println("Indique o item para comprar(quantidade): ");
-						int quantitySell = in.nextInt();
-						Product produtoVenda = user.getStock().getItemById(idProduto);
-						user.Sell(quantitySell, produtoVenda);
+						System.out.println("Reajustar sistema de vendas.");
 						break;
 					case "4":
-						user.showLogs();
+						System.out.println("Reajustar sistema de logs.");
 						break;
 					case "5":
-						user.showReports();
+						System.out.println("Reajustar sistema de reports.");
 						break;
 					case "6":
-						user.createLogsReport();
+						System.out.println("Reajustar sistema de reports.");
 						break;
 					case "0":
 						in2.close();
